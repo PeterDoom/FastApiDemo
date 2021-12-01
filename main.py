@@ -1,8 +1,8 @@
 import datetime
-import http
 import random
 import uuid
 
+import uvicorn
 from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
@@ -16,3 +16,7 @@ async def generate_id():
         return {"dateOfExecution": datetime.datetime.utcnow(), "id": uuid.uuid4()}
     elif rand_int <= 5121:
         raise HTTPException(status_code=500, detail="connection failed")
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000)
